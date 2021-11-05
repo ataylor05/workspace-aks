@@ -1,23 +1,19 @@
 output "aks_cluster_name" {
-  value = azurerm_kubernetes_cluster.k8s.name
+  value = module.aks.aks_cluster_name
 }
 
 output "aks_cluster_id" {
-  value = azurerm_kubernetes_cluster.k8s.id
+  value = module.aks.aks_cluster_id
 }
 
 output "aks_cluster_fqdn" {
-  value = azurerm_kubernetes_cluster.k8s.fqdn
+  value = module.aks.aks_cluster_fqdn
 }
 
 output "aks_node_resource_group" {
-  value = azurerm_kubernetes_cluster.k8s.node_resource_group
+  value = module.aks.aks_node_resource_group
 }
 
 output "aks_identity_principal_id" {
-  value = azurerm_kubernetes_cluster.k8s.identity[0].principal_id
-}
-
-output "aks_kube_admin_config_raw" {
-  value = azurerm_kubernetes_cluster.k8s.kube_admin_config_raw
+  value = module.aks.aks_identity_principal_id
 }
