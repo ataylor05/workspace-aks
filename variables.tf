@@ -1,6 +1,16 @@
+variable "environment_tag" {
+    type = string
+    description = "The environment name for tagging."
+}
+
 variable "aks_subnet_name" {
     type = string
     description = "The name of the subnet to deploy AKS onto."
+}
+
+variable "aks_version" {
+    type = string
+    description = "The version of AKS to deploy."
 }
 
 variable "aks_vnet_name" {
@@ -33,6 +43,11 @@ variable "resource_group" {
     description = "The Azure resource group the AKS cluster belongs to."
 }
 
+variable "network_policy" {
+    type = string
+    description = "Sets up network policy to be used with Azure CNI. Currently supported values are calico and azure."
+}
+
 variable "node_admin_username" {
     type = string
     description = "The SSh username for AKS node access."
@@ -43,52 +58,52 @@ variable "node_admin_ssh_pub_key" {
     description = "The public key for the SSH user."
 }
 
-variable "aks_network_plugin" {
-    type = string
-    description = "The network plugin the AKS should use."
-}
-
-variable "aks_pod_cidr" {
-    type = string
-    description = "The network CIDR block for the pod network."
-}
-
-variable "aks_service_cidr" {
-    type = string
-    description = "The Network Range used by the Kubernetes service."
-}
-
-variable "aks_docker_bridge_cidr" {
-    type = string
-    description = "IP address (in CIDR notation) used as the Docker bridge IP address on nodes."
-}
-
-variable "aks_dns_service_ip" {
-    type = string
-    description = "IP address within the Kubernetes service address range that will be used by cluster service discovery (kube-dns)."
-}
-
-variable "cluster_node_count" {
-    type = string
-    description = "The number of nodes in the node pool."
-}
-
 variable "cluster_node_vm_size" {
     type = string
     description = "The size of the VM's being used for nodes."
 }
 
 variable "cluster_node_vm_disk_size" {
-    type = string
+    type = number
     description = "The disk size on the AKS nodes."
 }
 
-variable "aks_service_principal_id" {
-    type = string
-    description = "The service principal client id used by AKS."
+variable "local_account_disabled" {
+    type = bool
+    description = "If true nodes local accounts will be disabled."
 }
 
-variable "aks_service_principal_secret" {
+variable "sku_tier" {
     type = string
-    description = "The service principal client secret used by AKS."
+    description = "The SKU Tier that should be used for this Kubernetes Cluster. Possible values are Free and Paid (which includes the Uptime SLA)."
+}
+
+variable "kube_dashboard" {
+    type = bool
+    description = "Enables the Kubernetes Dashboard."
+}
+
+variable "azure_policy" {
+    type = bool
+    description = "Enables the Azure Policy for Kubernetes Add On."
+}
+
+variable "cluster_auto_scaling_max_nodes" {
+    type = number
+    description = "The max number of nodes auto scaling can scale up to."
+}
+
+variable "maintenance_window_day" {
+    type = string
+    description = "A day in a week. Possible values are Sunday, Monday, Tuesday, Wednesday, Thursday, Friday and Saturday."
+}
+
+variable "maintenance_window_time_frame" {
+    type = list
+    description = "An array of hour slots in a day. Possible values are between 0 and 23."
+}
+
+variable "aad_admin_group" {
+    type = list
+    description = "A list of Object IDs of Azure Active Directory Groups which should have Admin Role on the Cluster."
 }
